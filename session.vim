@@ -13,6 +13,7 @@ unlet s:cpo_save
 set background=dark
 set backspace=indent,eol,start
 set display=truncate
+set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set helplang=ru
 set history=200
@@ -26,6 +27,7 @@ set ruler
 set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim81,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
 set scrolloff=5
 set showcmd
+set smartindent
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set ttimeout
 set ttimeoutlen=100
@@ -41,11 +43,11 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-$argadd ~/labs1
+$argadd ~/labs1/
 set stal=2
 tabnew
 tabrewind
-edit 8_selection_1/selection_1.f95
+edit 9_sorting_3/sorting_3.f95
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -77,8 +79,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:!
-setlocal commentstring=!%s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -109,16 +111,16 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=cqt
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=^\\c#\\=\\s*include\\s\\+
+setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=FortranGetFreeIndent()
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,=~end,=~case,=~if,=~else,=~do,=~where,=~elsewhere,=~select,=~endif,=~enddo,=~endwhere,=~endselect,=~elseif,=~type,=~interface,=~forall,=~associate,=~block,=~enum,=~endforall,=~endassociate,=~endblock,=~endenum
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -150,14 +152,14 @@ setlocal shiftwidth=8
 setlocal noshortname
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=0
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=.f08,.f03,.f95,.f90,.for,.f,.F,.f77,.ftn,.fpp
+setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
 if &syntax != 'fortran'
@@ -170,7 +172,7 @@ setlocal termmode=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=132
+setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
@@ -181,12 +183,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 58 - ((22 * winheight(0) + 26) / 53)
+let s:l = 20 - ((19 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-58
-normal! 017|
+20
+normal! 031|
 lcd ~/labs1
 wincmd w
 argglobal
@@ -262,6 +264,7 @@ setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal nomodifiable
 setlocal nrformats=bin,hex
+set number
 setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -320,7 +323,7 @@ wincmd w
 exe 'vert 1resize ' . ((&columns * 155 + 116) / 232)
 exe 'vert 2resize ' . ((&columns * 76 + 116) / 232)
 tabnext
-edit ~/labs1/6_marrays_2/marrays_2.f95
+edit ~/labs1/9_sorting_2/sorting_2.f95
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -346,8 +349,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:!
-setlocal commentstring=!%s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -378,16 +381,16 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=cqt
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=^\\c#\\=\\s*include\\s\\+
+setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=FortranGetFreeIndent()
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,=~end,=~case,=~if,=~else,=~do,=~where,=~elsewhere,=~select,=~endif,=~enddo,=~endwhere,=~endselect,=~elseif,=~type,=~interface,=~forall,=~associate,=~block,=~enum,=~endforall,=~endassociate,=~endblock,=~endenum
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -401,7 +404,8 @@ setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -418,14 +422,14 @@ setlocal shiftwidth=8
 setlocal noshortname
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=0
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=.f08,.f03,.f95,.f90,.for,.f,.F,.f77,.ftn,.fpp
+setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
 if &syntax != 'fortran'
@@ -438,7 +442,7 @@ setlocal termmode=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=132
+setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
@@ -454,12 +458,12 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
-normal! 09|
+normal! 0
 lcd ~/labs1
 tabnext 1
 set stal=1
-badd +73 ~/labs1/8_selection_1/selection_1.f95
-badd +0 ~/labs1
+badd +54 ~/labs1/8_selection_2/selection_2.f95
+badd +56 ~/labs1/8_selection_1/selection_1.f95
 badd +1 ~/labs1/6_marrays_2/marrays_2.f95
 badd +8 ~/labs1/7_searching_2/searching_2.f95
 badd +24 ~/labs1/7_searching_1/searching_1.f95
@@ -467,7 +471,8 @@ badd +1 ~/labs1/6_marrays_5/marrays_5_2.f95
 badd +60 ~/labs1/6_marrays_5/marrays_5.f95
 badd +1 ~/labs1/6_marrays_3/marrays_3.f95
 badd +5 ~/labs1/6_marrays_4/marrays_4.f95
-badd +25 ~/labs1/8_selection_2/selection_2.f95
+badd +0 ~/labs1/9_sorting_3/sorting_3.f95
+badd +0 ~/labs1/9_sorting_2/sorting_2.f95
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

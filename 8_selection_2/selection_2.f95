@@ -13,7 +13,8 @@ program selection_2
                                         ! размера U
         real :: r
         seed = 42
-        call random_seed(seed)
+        call srand(seed)
+        r = rand()
 
         write(*,*) "Введите k [0..11]:"
         read(*,*) k     
@@ -34,8 +35,7 @@ program selection_2
         ! во вспомогательный массив
         M = 0
         do i = 1, N
-                !call random_seed(seed)
-                call random_number(r)
+                r = rand()
                 arr(i) = aint(r * MAX_VALUE)
                 if (uniques(arr(i)) == 0) then
                         uniques(arr(i)) = i
@@ -45,47 +45,41 @@ program selection_2
         end do
 
         
-        ! поиск key - сортировка хвоста вспомог. массива, вплоть до k-того
-        ! элемента от начала
-        ! ( вообще массив uniques заведомо отсортирован по возрастанию и можно бы
-        ! сделать быстрее: key = arr(uniques(k)) )
+        ! поиск алгоритмом Хоара, он же quickselect
         n1 = 1
         n2 = M
-        do while (n2-n1 > 1)
-                ! выбор pivot 
+        do while ((n1 < n2).and.(p /= k))
+                ! выбор pivot точки 
                 p = (n2 + n1) / 2
+                p1 = arr2(p)
+
+                ! установка текущих границ циклов
                 j1 = n1
                 j2 = n2
-                write(*,*) n1, p, n2, "|", arr2(p)
-                write(*,'(12i3)')  (arr2(i),i=1,M)
+
                 ! индексы j1, j2 "сходятся" друг другу, на каждом шаге
                 ! выполняется перестановка элементов в массиве arr2 так,
                 ! что элементы меньше или равно arr2(p) лежат слева, больше - справа
                 do while (j1 < j2)
-                        if (arr2(j1) <= arr2(p)) then
+                        if (arr2(j1) < p1) then
                                 j1 = j1 + 1
-                        else if (arr2(j2) > arr2(p)) then
+                        else if (arr2(j2) > p1) then
                                 j2 = j2 - 1
                         else
-                                tmp = arr2(j1)
-                                arr2(j1) = arr2(j2)
-                                arr2(j2) = tmp
-                                p = j1
+                                call swap(arr2(j1), arr2(j2))
                         endif
-                end do  
+                end do
                 
-                write(*,*) j1, j2 
-                write(*,'(12i3)')  (arr2(i),i=1,M)
-                write(*,*) "================================="
-                !p = j1-1
-                ! устанавливаются новые границы интервала поиска
-                if (p <= k) then
-                        n1 = p
-                else
-                        n2 = p
+                ! установка новых границ для следующего цикла поиска
+                p = j1
+                if (p < k) then
+                        n1 = p + 1
+                else if (p > k) then
+                        n2 = p - 1
                 endif            
 
         end do
+
         key = arr2(k)
        
         ! Поиск индексов элементов исх.массива, равных
@@ -102,10 +96,18 @@ program selection_2
         write(2, *) "Размер массива:", N
         write(2, *) "Исходный массив"
         write(2,'(10i3)')  (arr(i),i=1,N)
-        write(2, *) "Вспомогательный массив (отсортирован c k-того эл-та)"
+        write(2, *) "Вспомогательный массив"
         write(2,'(10i3)')  (arr2(i),i=1,M)
         write(2, *) "Значение k-того элемента:", key
         write(2, *) "Найденные индексы"
         write(2,'(10i3)')  (idx(i),i=1,P)
         close(2)
 end
+
+subroutine swap(a, b)
+  integer, intent(inout) :: a, b
+  integer :: temp
+  temp = a
+  a = b
+  b = temp
+end subroutine swap
